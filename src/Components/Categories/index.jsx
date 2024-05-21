@@ -1,7 +1,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { updateCategory } from '../../store/categories';
-import { productFilter } from '../../store/products.js';
+import { productsFilter } from '../../store/products.js';
 import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -25,14 +25,13 @@ export default function Categories() {
   };
 
   useEffect(() => {
-    dispatch(productFilter(activeCategory))
+    dispatch(productsFilter(activeCategory))
   }, [activeCategory, dispatch])
 
   return (
     <section>
       <h2>Browse Our New Drip</h2>
       {activeCategory ? <h3> Selected Category: {activeCategory}</h3> : <h3>Please Select A Category</h3>}
-      <Button onClick={() => clearCategory()}>Reset</Button>
       <Box
         sx={{
           display: 'flex',
@@ -46,6 +45,7 @@ export default function Categories() {
           },
         }}
       >
+        <Button onClick={() => clearCategory()}>See All</Button>
         {categories.map((category, idx) => {
           return <Card key={idx} sx={{ minWidth: 275 }} >
             <CardContent>
@@ -57,7 +57,7 @@ export default function Categories() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button onClick={() => handleClick(category)}>Select</Button>
+              <Button onClick={() => handleClick(category)}>Click Here</Button>
             </CardActions>
           </Card>
         })}

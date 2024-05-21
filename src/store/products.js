@@ -104,7 +104,7 @@ export const productReducer = (state = initialState, action) => {
   }
 };
 
-export const productFilter = (category) => {
+export const productsFilter = (category) => {
   return {
     type: "FILTER",
     payload: category,
