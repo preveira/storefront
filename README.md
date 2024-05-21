@@ -75,3 +75,7 @@ Any environment configuration steps.
 ## Change Log
 
 1.0.0
+
+## Credits and Collaborations:
+- Isai Chaidez
+- Brock Britton
