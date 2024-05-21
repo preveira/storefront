@@ -9,7 +9,8 @@ import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { green, grey, lightBlue } from '@mui/material/colors';
+import { grey, lightBlue } from '@mui/material/colors';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 
@@ -73,6 +74,14 @@ export default function Products() {
                 {product.description}
               </Typography>
             </CardContent>
+            <Button
+            variant='contained' disableElevation
+              sx={{ bgcolor: lightBlue[500],
+                color: 'black',
+                marginLeft: '20px',
+               }}
+              onClick={() => console.log('Added to Cart')}
+            >ADD TO CART</Button>
           </Card>
 
         })}
