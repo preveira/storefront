@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -11,7 +12,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
-  const cartItems = [];
+  const cartItems = useSelector(state => state.cart.items);
   const previouslyViewedItems = [];
 
   const list = (anchor) => {
@@ -28,26 +29,26 @@ export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
         onKeyDown={toggleDrawer(anchor, false)}
       >
         <List>
-          {cartItems.map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {cartItems.map((item, index) => (
+            <ListItem key={index} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={item.name} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          {previouslyViewedItems.map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {previouslyViewedItems.map((item, index) => (
+            <ListItem key={index} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={item.name} />
               </ListItemButton>
             </ListItem>
           ))}
