@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Drawer } from '@mui/material';
-
+import { Button } from '@mui/material';
+import AnchorTemporaryDrawer from '../Cart';
 
 const Header = () => {
   const [state, setState] = React.useState({
@@ -16,20 +16,17 @@ const Header = () => {
   };
 
   return (
-    <header style= {{ display: 'flex', alignContent: 'space-between'}}>
+    <header style={{ display: 'flex', alignContent: 'space-between' }}>
       <div>
-        <h1 style={{marginLeft: '30px'}}>
+        <h1 style={{ marginLeft: '30px' }}>
           Kicks and Threads Store
         </h1>
       </div>
       <div>
-        <div>
-        <Button 
-        onClick={toggleDrawer('right', true)}
-        xs={{ alignText: 'center'}}
-        >Cart</Button>
-        </div>
-        <Drawer state={state} toggleDrawer={toggleDrawer} />
+        <Button onClick={toggleDrawer('right', true)}>
+          Cart: 
+        </Button>
+        <AnchorTemporaryDrawer state={state} toggleDrawer={toggleDrawer} />
       </div>
     </header>
   );
