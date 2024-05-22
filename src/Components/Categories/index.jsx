@@ -30,8 +30,8 @@ export default function Categories() {
 
   return (
     <section>
-      <h2>Browse Our New Drip</h2>
-      {activeCategory ? <h3> Selected Category: {activeCategory}</h3> : <h3>Please Select A Category</h3>}
+      <h2 style={{ marginLeft: '30px'}}>Browse Our New Drip</h2>
+      {activeCategory ? <h3 style={{ marginLeft: '30px'}}> Selected Category: {activeCategory}</h3> : <h3 style={{ marginLeft: '30px'}}>Please Select A Category</h3>}
       <Box
         sx={{
           display: 'flex',
@@ -42,10 +42,13 @@ export default function Categories() {
             height: 150,
             backgroundColor: 'gray', 
             color: 'lightblue',
+            marginLeft: '30px',
           },
         }}
       >
-        <Button onClick={() => clearCategory()}>See All</Button>
+        <Button 
+        onClick={() => clearCategory()}
+        >See All</Button>
         {categories.map((category, idx) => {
           return <Card key={idx} sx={{ minWidth: 275 }} >
             <CardContent>

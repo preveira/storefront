@@ -16,19 +16,22 @@ const Header = () => {
   };
 
   return (
-    <>
-    <div>
-    <h1>
-      Kicks and Threads Store
-    </h1>
-    </div>
-    <div>
-    <header>
-      <Button onClick={toggleDrawer('right', true)}>Open Drawer</Button>
-      <Drawer state={state} toggleDrawer={toggleDrawer} />
+    <header style= {{ display: 'flex', alignContent: 'space-between'}}>
+      <div>
+        <h1 style={{marginLeft: '30px'}}>
+          Kicks and Threads Store
+        </h1>
+      </div>
+      <div>
+        <div>
+        <Button 
+        onClick={toggleDrawer('right', true)}
+        xs={{ alignText: 'center'}}
+        >Cart</Button>
+        </div>
+        <Drawer state={state} toggleDrawer={toggleDrawer} />
+      </div>
     </header>
-    </div>
-    </>
   );
 };
 

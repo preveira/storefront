@@ -39,7 +39,7 @@ export default function Products() {
 
   return (
     <>
-      <h2>Our Products</h2>
+      <h2 style={{ marginLeft: '30px'}}>Our Products</h2>
       <Box
         sx={{
           display: 'flex',
@@ -48,11 +48,14 @@ export default function Products() {
             m: 1,
             width: 420,
             height: 500,
+            marginLeft: '30px',
           },
         }}
       >
         {filteredProducts.map((product, idx) => {
-          return <Card key={idx} sx={{ maxWidth: 345, bgcolor: grey[500] }}>
+          return <Card key={idx} sx={{ maxWidth: 345, 
+          bgcolor: grey[500], 
+          }}>
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: lightBlue[500] }} aria-label="drip">
@@ -65,7 +68,8 @@ export default function Products() {
             <CardMedia
               component="img"
               height="300"
-              sx={{ objectFit: 'contain' }}
+              sx={{ objectFit: 'contain',
+              }}
               image={product.image}
               alt={product.name}
             />
