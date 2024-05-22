@@ -1,8 +1,11 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
 import AnchorTemporaryDrawer from '../Cart';
 
 const Header = () => {
+  const cartItems = useSelector(state => state.cart.items);
+  const cartItemCount = cartItems.length;
   const [state, setState] = React.useState({
     right: false,
   });
@@ -24,7 +27,7 @@ const Header = () => {
       </div>
       <div>
         <Button onClick={toggleDrawer('right', true)}>
-          Cart: 
+          Cart: {cartItemCount}
         </Button>
         <AnchorTemporaryDrawer state={state} toggleDrawer={toggleDrawer} />
       </div>

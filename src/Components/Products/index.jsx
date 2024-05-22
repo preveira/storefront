@@ -1,5 +1,6 @@
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart } from '../../store/cart';
 import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -28,7 +29,8 @@ const ExpandMore = styled((props) => {
 export default function Products() {
   const [expanded, setExpanded] = useState(false);
 
-  const filteredProducts = useSelector(state => state.product.filteredProducts)
+  const filteredProducts = useSelector(state => state.product.filteredProducts);
+  const dispatch = useDispatch();
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -84,7 +86,7 @@ export default function Products() {
                 color: 'black',
                 marginLeft: '20px',
                }}
-              onClick={() => console.log('Added to Cart')}
+              onClick={() => dispatch(addToCart(product))}
             >ADD TO CART</Button>
           </Card>
 

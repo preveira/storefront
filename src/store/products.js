@@ -98,7 +98,10 @@ export const productReducer = (state = initialState, action) => {
           }
         }),
       };
-
+      //changes here check demo code for changes
+    case 'ADD_TO_CART':
+      console.log('DECREMENT PRODUCT COUNT', action.payload)
+      return state;
     default:
       return state;
   }
