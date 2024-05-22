@@ -1,10 +1,35 @@
+import React from 'react';
+import { Button } from '@mui/material';
+import AnchorTemporaryDrawer from '../Cart';
 
+const Header = () => {
+  const [state, setState] = React.useState({
+    right: false,
+  });
 
-export default function Header() {
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
 
   return (
-    <header>
-      <h1>Kicks and Threads Store</h1>
+    <header style={{ display: 'flex', alignContent: 'space-between' }}>
+      <div>
+        <h1 style={{ marginLeft: '30px' }}>
+          Kicks and Threads Store
+        </h1>
+      </div>
+      <div>
+        <Button onClick={toggleDrawer('right', true)}>
+          Cart: 
+        </Button>
+        <AnchorTemporaryDrawer state={state} toggleDrawer={toggleDrawer} />
+      </div>
     </header>
-  )
-}
+  );
+};
+
+export default Header;
