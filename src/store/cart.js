@@ -1,21 +1,26 @@
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  items:  []};
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: {
+    items: [],
+  },
+  reducers: {
+    addToCart: (state, action) => {
+      state.items.push(action.payload);
+    },
+    removeFromCart: (state, action) => {
+      const index = state.items.findIndex(item => item.id === action.payload.id);
+      if (index !== -1) {
+        state.items.splice(index, 1);
+      }
+    },
+  },
+});
 
-export const cartReducer = (state = initialState, action) => {
-  switch(action.type) {
-    case 'ADD_TO_CART':
-      return {items: [...state.items, action.payload]};
-    default:
-      return state;
-  
-  }
+export const selectTotal = (state) => 
+  state.cart.items.reduce((total, item) => total + item.price, 0);
 
-}
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
-export const addToCart = (product) => {
-  return {
-    type: 'ADD_TO_CART',
-    payload: product
-  }
-}
+export const cartReducer = cartSlice.reducer;

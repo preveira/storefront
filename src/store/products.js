@@ -1,3 +1,5 @@
+let productId = 0;
+
 export const createProduct = (
   category,
   name,
@@ -6,6 +8,7 @@ export const createProduct = (
   price,
   countInStock,
 ) => ({
+  id: productId++,
   category,
   name,
   description: desc,
@@ -89,7 +92,7 @@ export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FILTER":
       return {
-        products: state.products,
+        ...state,
         filteredProducts: state.products.filter((product) => {
           if (product.category === action.payload) {
             return product;
@@ -98,10 +101,29 @@ export const productReducer = (state = initialState, action) => {
           }
         }),
       };
-      //changes here check demo code for changes
+
     case 'ADD_TO_CART':
-      console.log('DECREMENT PRODUCT COUNT', action.payload)
-      return state;
+      return {
+        ...state,
+        products: state.products.map(product => 
+          product.id === action.payload ? { ...product, countInStock: product.countInStock - 1 } : product
+        ),
+        filteredProducts: state.filteredProducts.map(product => 
+          product.id === action.payload ? { ...product, countInStock: product.countInStock - 1 } : product
+        ),
+      };
+
+    case 'REMOVE_FROM_CART':
+      return {
+        ...state,
+        products: state.products.map(product => 
+          product.id === action.payload ? { ...product, countInStock: product.countInStock + 1 } : product
+        ),
+        filteredProducts: state.filteredProducts.map(product => 
+          product.id === action.payload ? { ...product, countInStock: product.countInStock + 1 } : product
+        ),
+      };
+
     default:
       return state;
   }
