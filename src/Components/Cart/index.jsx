@@ -17,6 +17,10 @@ export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
   const dispatch = useDispatch();
   const totalPrice = useSelector(selectTotal);
 
+  const handleRemoval = (item) => {
+    dispatch(removeFromCart(item));
+  }
+
   const list = (anchor) => {
     let itemCount = 0;
     for (let i = 0; i < cartItems.length; i++) {
@@ -33,7 +37,7 @@ export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
         <List>
           {cartItems.map((item, index) => (
             <ListItem key={index} disablePadding>
-              <ListItemButton onClick={() => dispatch(removeFromCart(item.id))}>
+              <ListItemButton onClick={() => dispatch(handleRemoval(item))}>
                   {<CancelIcon/>}
                 <ListItemText primary={item.name} />
               </ListItemButton>
