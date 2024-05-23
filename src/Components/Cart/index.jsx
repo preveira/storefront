@@ -23,9 +23,6 @@ export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
       itemCount++;
     }
 
-
-
-
     return (
       <Box
         sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
