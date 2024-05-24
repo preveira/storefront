@@ -60,7 +60,7 @@ export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
           Total items in cart: {itemCount}
         </Box>
         <Box sx={{ p: 2 }}>
-          Total Price: {totalPrice}
+          Total Price: ${totalPrice}
         </Box>
       </Box>
     );

@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import { grey, lightBlue } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 
 
 const ExpandMore = styled((props) => {
@@ -64,8 +65,8 @@ export default function Products() {
                   DRIP
                 </Avatar>
               }
-              title={product.name}
-              subheader={product.category}
+              title={`${product.name} - $${product.price}`}
+              subheader={`${product.category} - ${product.countInStock} in stock`}
             />
             <CardMedia
               component="img"
@@ -88,6 +89,7 @@ export default function Products() {
                }}
               onClick={() => dispatch(addToCart(product))}
             >ADD TO CART</Button>
+            <Link to={`/products/${product.id}`}>Product Details</Link>
           </Card>
 
         })}

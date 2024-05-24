@@ -1,4 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const addToCartAsync = createAsyncThunk(
+  'cart/addToCartAsync',
+  async (product) => {
+    const response = await axios.put(`/api/products/${product.id}`, { countInStock: product.countInStock - 1 });
+    return response.data;
+  }
+);
+
+export const removeFromCartAsync = createAsyncThunk(
+  'cart/removeFromCartAsync',
+  async (product) => {
+    const response = await axios.put(`/api/products/${product.id}`, { countInStock: product.countInStock + 1 });
+    return response.data;
+  }
+);
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -15,6 +32,18 @@ const cartSlice = createSlice({
         state.items.splice(index, 1);
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addToCartAsync.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      })
+      .addCase(removeFromCartAsync.fulfilled, (state, action) => {
+        const index = state.items.findIndex(item => item.id === action.payload.id);
+        if (index !== -1) {
+          state.items.splice(index, 1);
+        }
+      });
   },
 });
 
