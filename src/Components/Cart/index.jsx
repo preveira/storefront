@@ -1,19 +1,25 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { removeFromCart } from '../../store/cart';
+import { selectTotal } from '../../store/cart';
 
 export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
   const cartItems = useSelector(state => state.cart.items);
   const previouslyViewedItems = [];
+  const dispatch = useDispatch();
+  const totalPrice = useSelector(selectTotal);
+
+  const handleRemoval = (item) => {
+    dispatch(removeFromCart(item));
+  }
 
   const list = (anchor) => {
     let itemCount = 0;
@@ -31,10 +37,8 @@ export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
         <List>
           {cartItems.map((item, index) => (
             <ListItem key={index} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+              <ListItemButton onClick={() => dispatch(handleRemoval(item))}>
+                  {<CancelIcon/>}
                 <ListItemText primary={item.name} />
               </ListItemButton>
             </ListItem>
@@ -45,9 +49,7 @@ export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
           {previouslyViewedItems.map((item, index) => (
             <ListItem key={index} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+                {<CancelIcon/>}
                 <ListItemText primary={item.name} />
               </ListItemButton>
             </ListItem>
@@ -56,6 +58,9 @@ export default function AnchorTemporaryDrawer({ state, toggleDrawer }) {
         <Divider />
         <Box sx={{ p: 2 }}>
           Total items in cart: {itemCount}
+        </Box>
+        <Box sx={{ p: 2 }}>
+          Total Price: ${totalPrice}
         </Box>
       </Box>
     );

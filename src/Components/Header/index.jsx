@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import AnchorTemporaryDrawer from '../Cart';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const cartItems = useSelector(state => state.cart.items);
@@ -29,6 +30,7 @@ const Header = () => {
         <Button onClick={toggleDrawer('right', true)}>
           Cart: {cartItemCount}
         </Button>
+        <Link to="/cart">Cart ({cartItemCount})</Link>
         <AnchorTemporaryDrawer state={state} toggleDrawer={toggleDrawer} />
       </div>
     </header>
